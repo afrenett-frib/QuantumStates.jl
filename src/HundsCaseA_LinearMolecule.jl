@@ -252,11 +252,11 @@ function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_L
     # Hirota, eq. (2.3.67)
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F :I, :J)
+    if ~delta(state, state′, :F, :M)
         return 0.0
     else
         return (
-             P * (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
+             δ(I, I′)*P * (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
         )
     end
 end
