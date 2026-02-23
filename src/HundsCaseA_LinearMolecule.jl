@@ -247,16 +247,38 @@ function Hyperfine_IF(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_Lin
 end
 export Hyperfine_IF
 
-#from doi.org/10.1063/1.1712160
-function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+    # Fermi contact interaction
+    # Hirota, eq. (2.3.67)
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
     if ~delta(state, state′, :ℓ, :F, :M)
         return 0.0
     else
-       return 124   
+        return (
+            (-1)^(I + J + F′) * (-1)^(S - Σ) * (-1)^(J - P) * 
+            sqrt(I * (I + 1) * (2I + 1) * (2J + 1) * (2J′ + 1) * S * (S + 1) * (2S + 1)) *
+            wigner6j(I, J, F′, J′, I, 1) *
+            sum(
+                wigner3j(J, 1, J′, -P, q, P′) *
+                wigner3j(S, 1, S, -Σ, q, Σ′)
+                for q ∈ -1:1
+            )
+        )
+    end
 end
-export Hyperfine_IJ_diag
+export Hyperfine_IJ_d
+
+#from doi.org/10.1063/1.1712160
+#function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+#    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
+#    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
+#    if ~delta(state, state′, :ℓ, :F, :M)
+#        return 0.0
+#    else
+#       return 124   
+#end
+#export Hyperfine_IJ_diag
 
     #P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
 #from doi.org/10.1063/1.1712160
