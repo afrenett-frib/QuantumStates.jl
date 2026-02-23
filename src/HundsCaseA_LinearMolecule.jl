@@ -248,27 +248,27 @@ end
 export Hyperfine_IF
 
 #from doi.org/10.1063/1.1712160
-function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
-    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
-    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M, :J, :P)
-        return 0.0
-    else
-        return 124   
-end
-export Hyperfine_IJ_diag
+#function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+#    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
+#    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
+#    if ~delta(state, state′, :F, :M, :J, :P)
+#        return 0.0
+#    else
+#       return 124   
+#end
+#export Hyperfine_IJ_diag
 
     #P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
 #from doi.org/10.1063/1.1712160
-function Hyperfine_IJ_offdiag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
-    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
-    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M, :P)
-        return 0.0
-    else
-        return δ(J, J′+1)*(-1)*sqrt(J^2 - P^2)*(1/(2*J*sqrt(4J^2-1)))*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
-end
-export Hyperfine_IJ_offdiag
+#function Hyperfine_IJ_offdiag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+#    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
+#    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
+#    if ~delta(state, state′, :F, :M, :P)
+#        return 0.0
+#    else
+#        return δ(J, J′+1)*(-1)*sqrt(J^2 - P^2)*(1/(2*J*sqrt(4J^2-1)))*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
+#end
+#export Hyperfine_IJ_offdiag
 
 #IDK where this came from but I think it's wrong
 #function Hyperfine_IJ(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
