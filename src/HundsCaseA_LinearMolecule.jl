@@ -255,7 +255,7 @@ function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_L
         return 0.0
     else
         return (
-             δ(I, I′)*abs(P)* (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
+             δ(J, J′)*δ(I, I′)*abs(P)* (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
         )
     end
 end
@@ -269,7 +269,7 @@ function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_
         return 0.0
     else
         return (
-             δ(J, J′+1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
+             δ(I, I′)*δ(J, J′+1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
         )
     end
 end
