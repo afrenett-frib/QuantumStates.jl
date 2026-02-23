@@ -248,8 +248,7 @@ end
 export Hyperfine_IF
 
 function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
-    # Fermi contact interaction
-    # Hirota, eq. (2.3.67)
+    #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
     if ~delta(state, state′, :F, :M)
@@ -262,23 +261,25 @@ function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_L
 end
 export Hyperfine_IJ_d
 
-#from doi.org/10.1063/1.1712160
-#function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
-#    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
-#    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-#    if ~delta(state, state′, :ℓ, :F, :M)
-#        return 0.0
-#    else
-#       return 124   
-#end
-#export Hyperfine_IJ_diag
+function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+    #from doi.org/10.1063/1.1712160
+    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
+    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
+    if ~delta(state, state′, :F, :M)
+        return 0.0
+    else
+        return (
+             δ(I, I′)*δ(J, J′+1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
+        )
+    end
+end
+export Hyperfine_IJ_od
 
-    #P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
 #from doi.org/10.1063/1.1712160
 #function Hyperfine_IJ_offdiag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
 #    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
 #    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-#    if ~delta(state, state′, :F, :M, :P)
+#    if ~delta(state, state′, :F, :M)
 #        return 0.0
 #    else
 #        return δ(J, J′+1)*(-1)*sqrt(J^2 - P^2)*(1/(2*J*sqrt(4J^2-1)))*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
