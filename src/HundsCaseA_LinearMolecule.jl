@@ -247,7 +247,7 @@ function Hyperfine_IF(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_Lin
 end
 export Hyperfine_IF
 
-#NOT FOR STATES WITH LAMBDA/OMEGA DOUBLING
+#NOT FOR STATES WITH LAMBDA/OMEGA DOUBLING YET
 function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
@@ -262,16 +262,16 @@ function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_L
 end
 export Hyperfine_IJ_d
 
-#NOT FOR STATES WITH LAMBDA/OMEGA DOUBLING
+#NOT FOR STATES WITH LAMBDA/OMEGA DOUBLING YET
 function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M, :P, :Σ, :Λ)
+    if ~delta(state, state′, :F, :M)
         return 0.0
     else
         return (
-             δ(I, I′)*δ(J, J′+1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
+             δ(abs(P), abs(P′))*δ(I, I′)*δ(J, J′+1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
         )
     end
 end
