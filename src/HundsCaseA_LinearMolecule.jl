@@ -256,14 +256,7 @@ function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_L
         return 0.0
     else
         return (
-            (-1)^(I + J + F′) * (-1)^(S - Σ) * (-1)^(J - P) * 
-            sqrt(I * (I + 1) * (2I + 1) * (2J + 1) * (2J′ + 1) * S * (S + 1) * (2S + 1)) *
-            wigner6j(I, J, F′, J′, I, 1) *
-            sum(
-                wigner3j(J, 1, J′, -P, q, P′) *
-                wigner3j(S, 1, S, -Σ, q, Σ′)
-                for q ∈ -1:1
-            )
+             P * (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
         )
     end
 end
