@@ -263,7 +263,7 @@ end
 export Hyperfine_IJ_d
 
 #NOT FOR STATES WITH LAMBDA/OMEGA DOUBLING YET
-function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+function Hyperfine_IJ_od1(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
@@ -271,11 +271,25 @@ function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_
         return 0.0
     else
         return (
-              wigner3j(J, 1, J′, -P, 0, P′)*wigner6j(I, J, F′, J′, I, 1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
+              δ(J,J′-1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
         )
     end
 end
-export Hyperfine_IJ_od
+export Hyperfine_IJ_od1
+
+function Hyperfine_IJ_od2(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+    #from doi.org/10.1063/1.1712160
+    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
+    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
+    if ~delta(state, state′, :F, :M, :Λ, :P)
+        return 0.0
+    else
+        return (
+              δ(J-1,J′)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
+        )
+    end
+end
+export Hyperfine_IJ_od2
 
 #from doi.org/10.1063/1.1712160
 #function Hyperfine_IJ_offdiag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
