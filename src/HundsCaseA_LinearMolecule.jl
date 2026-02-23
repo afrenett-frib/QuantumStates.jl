@@ -259,7 +259,10 @@ export Hyperfine_IF
 function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    return δ(F, F′)*δ(J, J′)*δ(I, I′)*δ(P, P′)*δ(M, M′)*P*(1/(2*J*(J+1)))*(F(F+1)-J*(J+1)-I*(I+1))
+    if ~delta(state, state′, :F, :M, :J, :I, :P)
+        return 0.0
+    else
+        return P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
 end
 export Hyperfine_IJ_diag
 
@@ -267,7 +270,10 @@ export Hyperfine_IJ_diag
 function Hyperfine_IJ_offdiag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    return δ(F, F′)*δ(J, J′+1)*δ(I, I′)*δ(P, P′)*δ(M, M′)*(-1)*sqrt(J^2 - P^2)*(1/(2*J*sqrt(4J^2-1)))*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
+    if ~delta(state, state′, :F, :M, :I, :P)
+        return 0.0
+    else
+        return δ(J, J′+1)*(-1)*sqrt(J^2 - P^2)*(1/(2*J*sqrt(4J^2-1)))*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
 end
 export Hyperfine_IJ_offdiag
     
