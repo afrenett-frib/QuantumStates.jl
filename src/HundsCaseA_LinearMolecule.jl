@@ -267,7 +267,7 @@ function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :Σ, :Λ, :K, :F, :M)
+    if ~delta(state, state′, :F, :M)
         return 0.0
     else
         return (
