@@ -268,6 +268,7 @@ function Hyperfine_IJ_offdiag(state::HundsCaseA_LinearMolecule, state′::HundsC
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
     return δ(F, F′)*δ(J, J′+1)*δ(I, I′)*δ(P, P′)*δ(M, M′)*(-1)*sqrt(J^2 - P^2)*(1/(2*J*sqrt(4J^2-1)))*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+1+1))
+end
 export Hyperfine_IJ_offdiag
     
 function Hyperfine_Dipolar_c(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
