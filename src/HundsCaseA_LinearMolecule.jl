@@ -267,11 +267,11 @@ function Hyperfine_IJ_od1(state::HundsCaseA_LinearMolecule, state′::HundsCaseA
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M, :Λ, :P)
+    if ~delta(state, state′, :F, :M)
         return 0.0
     else
         return (
-              δ(J,J′-1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
+              δ(abs(P-P′),2)*δ(J,J′-1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
         )
     end
 end
@@ -281,11 +281,11 @@ function Hyperfine_IJ_od2(state::HundsCaseA_LinearMolecule, state′::HundsCaseA
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M, :Λ, :P)
+    if ~delta(state, state′, :F, :M)
         return 0.0
     else
         return (
-              δ(J-1,J′)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
+              δ(abs(P-P′),2)*δ(J-1,J′)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
         )
     end
 end
