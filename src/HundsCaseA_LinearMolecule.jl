@@ -248,15 +248,15 @@ end
 export Hyperfine_IF
 
 #from doi.org/10.1063/1.1712160
-#function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
-#    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
-#    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-#    if ~delta(state, state′, :F, :M, :J, :P)
-#        return 0.0
-#    else
-#       return 124   
-#end
-#export Hyperfine_IJ_diag
+function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
+    v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
+    v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
+    if ~delta(state, state′, :F, :M, :J, :P)
+        return 0.0
+    else
+       return 124   
+end
+export Hyperfine_IJ_diag
 
     #P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
 #from doi.org/10.1063/1.1712160
