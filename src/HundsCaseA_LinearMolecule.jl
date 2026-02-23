@@ -262,7 +262,7 @@ function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCase
     if ~delta(state, state′, :F, :M, :J, :I, :P)
         return 0.0
     else
-        return P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
+        return 124#P*(1/(2*J*(J+1)))*(F*(F+1)-J*(J+1)-I*(I+1))
 end
 export Hyperfine_IJ_diag
 
