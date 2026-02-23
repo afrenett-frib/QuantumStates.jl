@@ -251,7 +251,7 @@ export Hyperfine_IF
 function Hyperfine_IJ_diag(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_LinearMolecule)
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M, :J, :P)
+    if ~delta(state, state′, :ℓ, :F, :M)
         return 0.0
     else
        return 124   
