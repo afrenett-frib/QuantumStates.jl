@@ -252,11 +252,11 @@ function Hyperfine_IJ_d(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_L
     #from doi.org/10.1063/1.1712160
     v_1,  v_2,  ℓ,  v_3,  Λ,  K,  I,  S,  Σ,  J,  P,  F,  M  = unpack(state)
     v_1′, v_2′, ℓ′, v_3′, Λ′, K′, I′, S′, Σ′, J′, P′, F′, M′ = unpack(state′)
-    if ~delta(state, state′, :F, :M)
+    if ~delta(state, state′, :F, :M, :P, :Σ, :Λ)
         return 0.0
     else
         return (
-             δ(J, J′)*δ(I, I′)*abs(P)* (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
+             δ(J, J′)*δ(I, I′)*P* (2 * J * (J+1))^(-1) * (F * (F+1)- J * (J+1)- I * (I+1))
         )
     end
 end
