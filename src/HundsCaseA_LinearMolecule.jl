@@ -271,7 +271,7 @@ function Hyperfine_IJ_od(state::HundsCaseA_LinearMolecule, state′::HundsCaseA_
         return 0.0
     else
         return (
-              wigner3j(J, 1, J′, -P, 0, P′)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
+              wigner6j(I, J, F′, J′, I, 1)*(-1)*sqrt(J^2 - P^2) * (2*J*sqrt(4J^2-1))^(-1)*sqrt((F-I+J)*(F+J+I+1)*(J+I-F)*(F-J+I+1))
         )
     end
 end
